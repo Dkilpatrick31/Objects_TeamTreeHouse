@@ -1,14 +1,30 @@
 var message = '';
 var student;
+var search;
 
 function print(message) {
   var outputDiv = document.getElementById('output');
   outputDiv.innerHTML = message;
 };
 
-for (var i = 0; i < students.length; i ++) {
-  student = students[i];
-  message += '<h1>Student: ' + student.name + "</h1>";
-};
+function getStudentReport(student) {
+  var report = '<h1>Student: ' + student.name + "</h1>";
+  report += '<p>Stack: ' + student.stack + '</p>';
+  report += '<p>Achievements: ' + student.achievements + '</p>';
+  report += '<p>Points ' + student.points + '</p>';
+  return report;
+}
 
-print(message);
+while (true) {
+  search = prompt('Search studen records: type a name [Jody] (or type "quit" to end)');
+  if (search === null || search.toLowerCase() === 'quit') {
+    break;
+  }
+  for (var i = 0; i < students.length; i ++) {
+    student = students[i];
+    if (student.name === search) {
+      message = getStudentReport(student);
+      print(message);
+    }
+  }
+}
